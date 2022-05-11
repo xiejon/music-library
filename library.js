@@ -1,4 +1,11 @@
-let myLibrary = [];
+let myLibrary = [
+    {
+        title : "Harry Potter"
+    },
+    {
+        title : "Wizard of Oz"
+    }
+];
 
 function Book(title, author, pages, read) {
     let info;
@@ -21,3 +28,11 @@ function addBookToLibrary() {
     myLibrary.push(input);
 }
 
+myLibrary.forEach(book => {
+    const container = document.querySelector('.container');
+    const card = document.createElement('div');
+    card.classList.add('card');
+    card.textContent = book.title;
+    container.appendChild(card);
+    console.log(book.title);
+});
