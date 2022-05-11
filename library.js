@@ -1,3 +1,5 @@
+let myLibrary = [];
+
 function Book(title, author, pages, read) {
     let info;
 
@@ -11,7 +13,11 @@ function Book(title, author, pages, read) {
     } else {
         info = `${title} by ${author}, ${pages} pages, not read yet`;
     }
-
     return info;
+}
+
+function addBookToLibrary() {
+    let input = prompt("Title of Book?", '');
+    myLibrary.push(input);
 }
 
