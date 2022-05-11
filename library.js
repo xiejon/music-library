@@ -29,10 +29,29 @@ function addBookToLibrary() {
 }
 
 myLibrary.forEach(book => {
+    createCard(book);
+});
+
+function createCard(book) {
     const container = document.querySelector('.container');
     const card = document.createElement('div');
     card.classList.add('card');
     card.textContent = book.title;
     container.appendChild(card);
     console.log(book.title);
-});
+}
+
+// open pop-up
+function openForm() {
+    document.querySelector('.disabler').style.display = "block";
+    document.querySelector('.form-popup').style.display = "flex";
+}
+
+function closeForm() {
+    document.querySelector('.disabler').style.display = "none";
+    document.querySelector('.form-popup').style.display = "none";
+}
+
+const openButton = document.querySelector('.open-button');
+const container = document.querySelector('.container');
+openButton.addEventListener('click', openForm);
