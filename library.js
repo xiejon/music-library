@@ -53,5 +53,6 @@ function closeForm() {
 }
 
 const openButton = document.querySelector('.open-button');
-const container = document.querySelector('.container');
+const disabler = document.querySelector('.disabler');
 openButton.addEventListener('click', openForm);
+disabler.addEventListener('click', closeForm);

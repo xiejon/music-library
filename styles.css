@@ -15,10 +15,16 @@
     display: none;
     height: 300px;
     width: 300px;
-    position: relative;
-    margin: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
     background-color: white;
-    border: 2px solid black;
     z-index: 99999;
 }
 
