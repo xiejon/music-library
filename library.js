@@ -1,10 +1,11 @@
 let myLibrary = [];
 
-function Book(title, author, pages, read) {
+function Repertoire(title, composer, genre, keySig, playedBefore) {
     this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
+    this.composer = composer;
+    this.genre = genre;
+    this.keySig = keySig;
+    this.playedBefore = playedBefore;
 }
 
 function createCard(book) {
@@ -37,9 +38,13 @@ function clearForm() {
     pages = '';
     read = false;
     document.querySelector('#title').value = '';
-    document.querySelector('#author').value = '';
-    document.querySelector('#pages').value = '';
-    document.querySelector('#read').checked = false;
+    document.querySelector('#composer').value = '';
+    document.querySelector('#genre').value = '';
+
+    // NOTE TO SELF: change to dropdown selector
+    document.querySelector('#key-sig').value = '';
+
+    document.querySelector('#played-before').checked = false;
 }
 
 const openButton = document.querySelector('.open-button');
@@ -49,18 +54,20 @@ disabler.addEventListener('click', closeForm);
 
 // store input values from form
 let title;
-let author;
-let pages;
-let read;
+let composer;
+let genre;
+let keySig;
+let playedBefore;
 const enterButton = document.querySelector('.enter');
 enterButton.addEventListener('click', () => {
     title = document.querySelector('#title').value;
-    author = document.querySelector('#author').value;
-    pages = document.querySelector('#pages').value;
-    read = document.querySelector('#read').checked;
+    composer = document.querySelector('#composer').value;
+    genre = document.querySelector('#genre').value;
+    keySig = document.querySelector('#key-sig').value;
+    playedBefore = document.querySelector('#played-before').checked;
 
     // create new object in myLibrary and HTML div card
-    const book = new Book(title, author, pages, read);
+    const book = new Repertoire(title, composer, genre, keySig, playedBefore);
     myLibrary.push(book);
     createCard(book);
 
