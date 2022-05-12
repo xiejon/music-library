@@ -41,7 +41,7 @@ function createCard(book) {
     console.log(book.title);
 }
 
-// open pop-up
+// open & close pop-up
 function openForm() {
     document.querySelector('.disabler').style.display = "block";
     document.querySelector('.form-popup').style.display = "flex";
@@ -50,9 +50,33 @@ function openForm() {
 function closeForm() {
     document.querySelector('.disabler').style.display = "none";
     document.querySelector('.form-popup').style.display = "none";
+    clearForm();
+}
+
+function clearForm() {
+    title = '';
+    author = '';
+    pages = '';
+    read = false;
+    document.querySelector('#title').value = '';
+    document.querySelector('#author').value = '';
+    document.querySelector('#pages').value = '';
+    document.querySelector('#read').checked = false;
 }
 
 const openButton = document.querySelector('.open-button');
 const disabler = document.querySelector('.disabler');
 openButton.addEventListener('click', openForm);
 disabler.addEventListener('click', closeForm);
+
+// store input values from form 
+const enterButton = document.querySelector('.enter');
+let title;
+let author;
+let pages;
+let read;
+enterButton.addEventListener('click', () => {
+    title = document.querySelector('#title').value;
+    console.log(title);
+    closeForm();
+});

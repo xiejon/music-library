@@ -15,6 +15,8 @@
     display: none;
     height: 300px;
     width: 300px;
+
+    /* center the pop-up */
     position: absolute;
     left: 0;
     right: 0;
@@ -24,8 +26,19 @@
     margin-right: auto;
     margin-top: auto;
     margin-bottom: auto;
+
     background-color: white;
     z-index: 99999;
+}
+
+.form-container {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 40px auto;
+}
+
+.form-container h1 {
 }
 
 .disabler {
