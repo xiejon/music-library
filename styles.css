@@ -30,6 +30,8 @@ body, html {
 
 .container {
     height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr 5fr;
     font-family: Roboto;
 }
 
@@ -38,6 +40,7 @@ body, html {
     grid-template-rows: 1fr;
     align-items: center;
     justify-content: center;
+    background-color: var(--dark-green);
 }
 
 .header h1 {
@@ -49,7 +52,7 @@ body, html {
     height: 100%;
     display: grid;
     grid-template-rows: 1fr 5fr;
-    background-color: #474056;
+    background-color: var(--red);
 }
 .open-button {
     height: 50px; 
@@ -73,7 +76,7 @@ body, html {
 .card {
     height: 300px;
     flex-basis: 25%;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--violet);
 
     /* temporary */
     border: 1px solid black;
