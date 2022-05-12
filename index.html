@@ -11,29 +11,30 @@
 <body>
     <div class="container">
         <div class="header">
-            <p>Music Library</p>
+            <h1>Music Library</h1>
         </div> 
         <div class="main">
-            <button type="button" class="open-button">ADD REPERTOIRE</button>
+            <button type="button" class="open-button">+ ADD REPERTOIRE</button>
             <div class="disabler"></div>
+            <div class="cards-container"></div>
             <div class="form-popup">
                 <form action="" method="GET" class="form-container">
-                    <h1>New Repertoire</h1>
+                    <h2>New Repertoire</h2>
                     <div class="row">
-                        <label for="title">Title:</label>
-                        <input type="text" id="title" name="title">
+                        <input type="text" id="title" name="title" placeholder=''>
+                        <label for="title">Title</label>
                     </div>
                     <div class="row">
-                        <label for="composer">Composer:</label>
-                        <input type="text" id="composer" name="composer">
+                        <input type="text" id="composer" name="composer" placeholder=''>
+                        <label for="composer">Composer</label>
                     </div>
                     <div class="row">
-                        <label for="genre">Genre:</label>
-                        <input type="text" id="genre" name="genre">
+                        <input type="text" id="genre" name="genre" placeholder=''>
+                        <label for="genre">Genre</label>
                     </div>
                     <div class="row">
-                        <label for="key-sig">Key Signature:</label>
-                        <input type="text" id="key-sig" name="key-sig">
+                        <input type="text" id="key-sig" name="key-sig" placeholder=''>
+                        <label for="key-sig">Key Signature</label>
                     </div>
                     <div class="row">
                         <label for="played-before">Have you played it?</label>

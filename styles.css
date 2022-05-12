@@ -1,28 +1,80 @@
-* {
+body, html {
     margin: 0;
     padding: 0;
-    font-family: Roboto;
 }
 
 @font-face {
     font-family: Roboto;
     src: url(Roboto/Roboto-Regular.ttf);
-    font-weight: normal;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url(Roboto/Roboto-Medium.ttf);
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url(Roboto/Roboto-Bold.ttf);
+    font-weight: 900;
 }
 
 .container {
     height: 100vh;
+    font-family: Roboto;
+}
+
+.header {
     display: grid;
-    grid-template-rows: 15vh auto;
+    grid-template-rows: 1fr;
+    align-items: center;
+    justify-content: center;
+}
+
+.header h1 {
+    color: rgb(6, 6, 6);
+    font-weight: bolder;
+}
+
+.main {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr 5fr;
+    background-color: #bae6fd;
+}
+
+.open-button {
+    height: 50px; 
+    width: 200px;
+    align-self: center;
+    justify-self: center;
+    border: none;
+    font-size: 17px;
+    font-weight: bold;
+    background-color: #bae6fd;
+    color: rgb(0, 0, 0);
+}
+
+.cards-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 20px;
 }
 
 .card {
-    background-color: rgb(157, 157, 157);
+    height: 300px;
+    flex-basis: 25%;
+    background-color: rgb(255, 255, 255);
+
+    /* temporary */
+    border: 1px solid black;
 }
 
 .form-popup {
     display: none;
-    height: 300px;
+    height: 400px;
     width: 300px;
 
     /* center the pop-up */
@@ -41,13 +93,23 @@
 }
 
 .form-container {
-    padding: 20px;
+    padding: 0px 20px 20px 20px;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 40px auto;
+    grid-template-rows: 80px auto;
 }
 
-.form-container h1 {
+.form-container h2 {
+    justify-self: center;
+    align-self: center;
+}
+
+.row {
+
+}
+
+.row input {
+    font-family: inherit;
 }
 
 .disabler {

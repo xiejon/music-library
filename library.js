@@ -9,7 +9,7 @@ function Repertoire(title, composer, genre, keySig, playedBefore) {
 }
 
 function createCard(book) {
-    const container = document.querySelector('.container');
+    const container = document.querySelector('.cards-container');
     const card = document.createElement('div');
     const removeButton = document.createElement('button');
     card.classList.add('card');
