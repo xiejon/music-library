@@ -52,7 +52,7 @@ function createCard(music) {
 function deleteCard() {
     this.parentElement.remove();
     console.log(this.indexVal);
-    
+
     // remove object from myLibrary
     myLibrary.splice(this.indexVal, 1);
 }
@@ -98,10 +98,7 @@ function clearForm() {
     document.querySelector('#title').value = '';
     document.querySelector('#composer').value = '';
     document.querySelector('#genre').value = '';
-
-    // NOTE TO SELF: change to dropdown selector
     document.querySelector('#key-sig').value = '';
-
     document.querySelector('#played-before').checked = false;
 }
 
