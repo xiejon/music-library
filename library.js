@@ -1,11 +1,12 @@
 let myLibrary = [];
 
-function Repertoire(title, composer, genre, keySig, playedBefore) {
+function Repertoire(title, composer, genre, keySig, playedBefore, indexVal) {
     this.title = title;
     this.composer = composer;
     this.genre = genre;
     this.keySig = keySig;
     this.playedBefore = playedBefore;
+    this.indexVal = indexVal;
 }
 
 function createCard(music) {
@@ -50,10 +51,14 @@ function createCard(music) {
 // remove card button
 function deleteCard() {
     this.parentElement.remove();
+    console.log(this.indexVal);
+    // myLibrary.splice(this.indexVal, 1);
 }
 function removeCard() {
-    const removeButton = document.querySelector('.remove');
-    removeButton.addEventListener('click', deleteCard);
+    const removeButtons = document.querySelectorAll('.remove');
+    for (let i = 0; i < removeButtons.length; i++) {
+        removeButtons[i].addEventListener('click', deleteCard);
+    }
 }
 
 // change 'new' to 'played' when clicked, vice versa
@@ -65,8 +70,10 @@ function changeToPlayed(button) {
     }
 }
 function changePlayedStatus() {
-    const played = document.querySelector('.played');
-    played.addEventListener('click', changeToPlayed);
+    const playedButtons = document.querySelectorAll('.played');
+    for (let i = 0; i < playedButtons.length; i++) {
+        playedButtons[i].addEventListener('click', changeToPlayed);
+    }
 }
 
 // open & close pop-up
@@ -107,6 +114,7 @@ let composer;
 let genre;
 let keySig;
 let playedBefore;
+let indexVal;
 const enterButton = document.querySelector('.enter');
 enterButton.addEventListener('click', () => {
     title = document.querySelector('#title').value;
@@ -114,9 +122,10 @@ enterButton.addEventListener('click', () => {
     genre = document.querySelector('#genre').value;
     keySig = document.querySelector('#key-sig').value;
     playedBefore = document.querySelector('#played-before').checked;
+    indexVal = myLibrary.length;
 
     // create new object in myLibrary and HTML div card
-    const music = new Repertoire(title, composer, genre, keySig, playedBefore);
+    const music = new Repertoire(title, composer, genre, keySig, playedBefore, indexVal);
     myLibrary.push(music);
     createCard(music);
 
