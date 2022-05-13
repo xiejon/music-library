@@ -8,16 +8,48 @@ function Repertoire(title, composer, genre, keySig, playedBefore) {
     this.playedBefore = playedBefore;
 }
 
-function createCard(book) {
+function createCard(music) {
     const container = document.querySelector('.cards-container');
     const card = document.createElement('div');
     const removeButton = document.createElement('button');
     card.classList.add('card');
     removeButton.classList.add('remove');
-    card.textContent = book.title;
+
+    // add title, composer, etc. to card
+    const title = document.createElement('p');
+    const composer = document.createElement('p');
+    const genre = document.createElement('p');
+    const keySig = document.createElement('p');
+    const playedButton = document.createElement('button');
+    title.textContent = music.title;
+    composer.textContent = music.composer;
+    genre.textContent = music.genre;
+    keySig.textContent = music.keySig;
+    if (music.playedBefore) {
+        playedButton.textContent = "Played";
+    } else {
+        playedButton.textContent = "New";
+    }
+    removeButton.textContent = "Remove";
     container.appendChild(card);
+    card.appendChild(title);
+    card.appendChild(composer);
+    card.appendChild(genre);
+    card.appendChild(keySig);
+    card.appendChild(playedButton);
     card.appendChild(removeButton);
-    console.log(book.title);
+
+    // add event listener when remove is clicked
+    removeCard();
+}
+
+// remove card button
+function deleteCard() {
+    this.parentElement.remove();
+}
+function removeCard() {
+const removeButton = document.querySelector('.remove');
+removeButton.addEventListener('click', deleteCard);
 }
 
 // open & close pop-up
@@ -67,10 +99,9 @@ enterButton.addEventListener('click', () => {
     playedBefore = document.querySelector('#played-before').checked;
 
     // create new object in myLibrary and HTML div card
-    const book = new Repertoire(title, composer, genre, keySig, playedBefore);
-    myLibrary.push(book);
-    createCard(book);
+    const music = new Repertoire(title, composer, genre, keySig, playedBefore);
+    myLibrary.push(music);
+    createCard(music);
 
     closeForm();
 });
-

@@ -1,5 +1,5 @@
 :root {
-    --light-green: #BDC667;
+    --light-green: rgb(229, 237, 137);
     --mid-green: #77966D;
     --dark-green: #626D58;
     --violet: #544343;
@@ -44,7 +44,7 @@ body, html {
 }
 
 .header h1 {
-    color: rgb(6, 6, 6);
+    color: var(--light-green);
     font-weight: bolder;
 }
 
@@ -60,10 +60,11 @@ body, html {
     align-self: center;
     justify-self: center;
     border: none;
+    border-radius: 5px;
     font-size: 17px;
     font-weight: bold;
-    background-color: #bae6fd;
-    color: rgb(0, 0, 0);
+    background-color: var(--mid-green);
+    color: var(--light-green);
 }
 
 .cards-container {
@@ -76,10 +77,19 @@ body, html {
 .card {
     height: 300px;
     flex-basis: 25%;
+    border-radius: 10px;
     background-color: var(--violet);
+    color: var(--light-green);
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    justify-content: center;
+}
 
-    /* temporary */
-    border: 1px solid black;
+.card p {
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Pop-up Form */
@@ -138,6 +148,7 @@ body, html {
     outline: none;
     background-color: var(--violet);
     font-family: inherit;
+    font-size: 15px;
     color: var(--light-green);
 }
 
@@ -152,7 +163,7 @@ body, html {
 /* label animation  */
 .row input:focus ~ label,
 .row input:not(:placeholder-shown) ~ label {
-    top: -0.9rem;
+    top: -0.6rem;
     left: 0.4rem;
     font-size: 12px;
     transition: 150ms;
@@ -168,12 +179,13 @@ body, html {
 }
 
 .enter {
+    height: 45px;
     border: none;
     border-radius: 10px;
     background-color: var(--mid-green);
     font-size: 17px;
     font-weight: bold;
-    color: var(--violet);
+    color: var(--light-green);
 }
 
 .disabler {
