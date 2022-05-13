@@ -52,7 +52,9 @@ function createCard(music) {
 function deleteCard() {
     this.parentElement.remove();
     console.log(this.indexVal);
-    // myLibrary.splice(this.indexVal, 1);
+    
+    // remove object from myLibrary
+    myLibrary.splice(this.indexVal, 1);
 }
 function removeCard() {
     const removeButtons = document.querySelectorAll('.remove');
