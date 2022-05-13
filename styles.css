@@ -107,6 +107,11 @@ body, html {
     font-size: 20px;
 }
 
+.card p:first-of-type {
+    font-size: 23px;
+    font-weight: bold;
+}
+
 .card button {
     background-color: var(--mid-blue);
     border: none;

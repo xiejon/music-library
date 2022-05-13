@@ -1,9 +1,9 @@
 let myLibrary = [];
 
-function Repertoire(title, composer, genre, keySig, playedBefore, indexVal) {
+function Repertoire(title, composer, instrument, keySig, playedBefore, indexVal) {
     this.title = title;
     this.composer = composer;
-    this.genre = genre;
+    this.instrument = instrument;
     this.keySig = keySig;
     this.playedBefore = playedBefore;
     this.indexVal = indexVal;
@@ -15,7 +15,7 @@ function createCard(music) {
     const removeButton = document.createElement('button');
     const title = document.createElement('p');
     const composer = document.createElement('p');
-    const genre = document.createElement('p');
+    const instrument = document.createElement('p');
     const keySig = document.createElement('p');
     const playedButton = document.createElement('button');
     card.classList.add('card');
@@ -25,7 +25,7 @@ function createCard(music) {
     // add title, composer, etc. to card
     title.textContent = music.title;
     composer.textContent = music.composer;
-    genre.textContent = music.genre;
+    instrument.textContent = music.instrument;
     keySig.textContent = music.keySig;
     if (music.playedBefore) {
         playedButton.textContent = "PLAYED";
@@ -36,7 +36,7 @@ function createCard(music) {
     container.appendChild(card);
     card.appendChild(title);
     card.appendChild(composer);
-    card.appendChild(genre);
+    card.appendChild(instrument);
     card.appendChild(keySig);
     card.appendChild(playedButton);
     card.appendChild(removeButton);
@@ -97,7 +97,7 @@ function clearForm() {
     read = false;
     document.querySelector('#title').value = '';
     document.querySelector('#composer').value = '';
-    document.querySelector('#genre').value = '';
+    document.querySelector('#instrument').value = '';
     document.querySelector('#key-sig').value = '';
     document.querySelector('#played-before').checked = false;
 }
@@ -110,7 +110,7 @@ disabler.addEventListener('click', closeForm);
 // store input values from form
 let title;
 let composer;
-let genre;
+let instrument;
 let keySig;
 let playedBefore;
 let indexVal;
@@ -118,13 +118,13 @@ const enterButton = document.querySelector('.enter');
 enterButton.addEventListener('click', () => {
     title = document.querySelector('#title').value;
     composer = document.querySelector('#composer').value;
-    genre = document.querySelector('#genre').value;
+    instrument = document.querySelector('#instrument').value;
     keySig = document.querySelector('#key-sig').value;
     playedBefore = document.querySelector('#played-before').checked;
     indexVal = myLibrary.length;
 
     // create new object in myLibrary and HTML div card
-    const music = new Repertoire(title, composer, genre, keySig, playedBefore, indexVal);
+    const music = new Repertoire(title, composer, instrument, keySig, playedBefore, indexVal);
     myLibrary.push(music);
     createCard(music);
 
