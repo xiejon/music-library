@@ -12,25 +12,26 @@ function createCard(music) {
     const container = document.querySelector('.cards-container');
     const card = document.createElement('div');
     const removeButton = document.createElement('button');
-    card.classList.add('card');
-    removeButton.classList.add('remove');
-
-    // add title, composer, etc. to card
     const title = document.createElement('p');
     const composer = document.createElement('p');
     const genre = document.createElement('p');
     const keySig = document.createElement('p');
     const playedButton = document.createElement('button');
+    card.classList.add('card');
+    removeButton.classList.add('remove');
+    playedButton.classList.add('played');
+
+    // add title, composer, etc. to card
     title.textContent = music.title;
     composer.textContent = music.composer;
     genre.textContent = music.genre;
     keySig.textContent = music.keySig;
     if (music.playedBefore) {
-        playedButton.textContent = "Played";
+        playedButton.textContent = "PLAYED";
     } else {
-        playedButton.textContent = "New";
+        playedButton.textContent = "NEW";
     }
-    removeButton.textContent = "Remove";
+    removeButton.textContent = "REMOVE";
     container.appendChild(card);
     card.appendChild(title);
     card.appendChild(composer);
@@ -41,6 +42,9 @@ function createCard(music) {
 
     // add event listener when remove is clicked
     removeCard();
+    
+    // change played status when button is clicked
+    changePlayedStatus();
 }
 
 // remove card button
@@ -48,8 +52,21 @@ function deleteCard() {
     this.parentElement.remove();
 }
 function removeCard() {
-const removeButton = document.querySelector('.remove');
-removeButton.addEventListener('click', deleteCard);
+    const removeButton = document.querySelector('.remove');
+    removeButton.addEventListener('click', deleteCard);
+}
+
+// change 'new' to 'played' when clicked, vice versa
+function changeToPlayed(button) {
+    if (this.textContent === "NEW") {
+        this.textContent = "PLAYED";
+    } else {
+        this.textContent = "NEW";
+    }
+}
+function changePlayedStatus() {
+    const played = document.querySelector('.played');
+    played.addEventListener('click', changeToPlayed);
 }
 
 // open & close pop-up

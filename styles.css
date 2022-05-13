@@ -4,6 +4,12 @@
     --dark-green: #626D58;
     --violet: #544343;
     --red: #56282D;
+
+    --mid-gray: #8B8982;
+    --dark-blue: #373F47;
+    --mid-blue: #6C91C2;
+    --light-blue: #9BD1E5;
+    --light-cyan: #D1FAFF;
 }
 
 body, html {
@@ -31,7 +37,7 @@ body, html {
 .container {
     height: 100vh;
     display: grid;
-    grid-template-rows: 1fr 5fr;
+    grid-template-rows: 1fr 10fr;
     font-family: Roboto;
 }
 
@@ -40,11 +46,11 @@ body, html {
     grid-template-rows: 1fr;
     align-items: center;
     justify-content: center;
-    background-color: var(--dark-green);
+    background-color: var(--light-blue);
 }
 
 .header h1 {
-    color: var(--light-green);
+    color: var(--dark-blue);
     font-weight: bolder;
 }
 
@@ -52,7 +58,7 @@ body, html {
     height: 100%;
     display: grid;
     grid-template-rows: 1fr 5fr;
-    background-color: var(--red);
+    background-color: var(--dark-blue);
 }
 .open-button {
     height: 50px; 
@@ -63,8 +69,8 @@ body, html {
     border-radius: 5px;
     font-size: 17px;
     font-weight: bold;
-    background-color: var(--mid-green);
-    color: var(--light-green);
+    background-color: var(--light-blue);
+    color: var(--dark-blue);
 }
 
 .cards-container {
@@ -75,14 +81,17 @@ body, html {
 }
 
 .card {
-    height: 300px;
+    max-width: 300px;
+    max-height: 300px;
+    padding: 20px;
     flex-basis: 25%;
     border-radius: 10px;
-    background-color: var(--violet);
-    color: var(--light-green);
+    background-color: var(--light-blue);
+    color: var(--dark-blue);
     display: grid;
-    grid-template-rows: repeat(6, 1fr);
+    grid-template-rows: 40px 40px 40px 40px 60px 60px;
     justify-content: center;
+    gap: 5px;
 }
 
 .card p {
@@ -90,6 +99,31 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 20px;
+}
+
+.card button {
+    background-color: var(--mid-blue);
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: inherit;
+    color: var(--dark-blue);
+}
+
+.card button:first-of-type {
+    height: 30px;
+    width: 100px;
+    align-self: center;
+    justify-self: center;
+}
+
+.card button:last-of-type {
+    height: 40px;
+    width: 100%;
+    align-self: center;
+    justify-self: center;
 }
 
 /* Pop-up Form */
@@ -109,7 +143,7 @@ body, html {
     margin-top: auto;
     margin-bottom: auto;
 
-    background-color: var(--violet);
+    background-color: var(--light-blue);
     z-index: 99999;
 }
 
@@ -123,7 +157,7 @@ body, html {
 .form-container h2 {
     justify-self: center;
     align-self: center;
-    color: var(--light-green);
+    color: var(--dark-blue);
 }
 
 .row {
@@ -135,29 +169,29 @@ body, html {
     position: absolute;
     left: 1rem;
     top: 0.56rem;
-    background-color: var(--violet);
-    color: var(--light-green);
+    background-color: var(--light-blue);
+    color: var(--dark-blue);
 }
 
 .row input {
     width: 92%;
     height: 1.7rem;
     padding: 0.5rem 0.5rem 0.5rem 1rem;
-    border: 2px solid var(--mid-green);
+    border: 2px solid var(--dark-blue);
     border-radius: 10px;
     outline: none;
-    background-color: var(--violet);
+    background-color: var(--light-blue);
     font-family: inherit;
     font-size: 15px;
-    color: var(--light-green);
+    color: var(--dark-blue);
 }
 
 .row input:hover { 
-    border-color: #b9c6ae;
+    border-color: var(--mid-gray);
 }
 
 .row input:focus { 
-    border-color: #dbe9cf;
+    border-color: var(--light-cyan);
 }
 
 /* label animation  */
@@ -169,23 +203,18 @@ body, html {
     transition: 150ms;
 }
 
-.row #played-before {
-    position: absolute;
-    left: 3rem;
-}
-
 .checkbox {
-    color: var(--light-green);
+    color: var(--dark-blue);
 }
 
 .enter {
     height: 45px;
     border: none;
     border-radius: 10px;
-    background-color: var(--mid-green);
+    background-color: var(--dark-blue);
     font-size: 17px;
     font-weight: bold;
-    color: var(--light-green);
+    color: var(--light-blue);
 }
 
 .disabler {
