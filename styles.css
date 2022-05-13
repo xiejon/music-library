@@ -38,15 +38,20 @@ body, html {
     height: 100vh;
     display: grid;
     grid-template-rows: 1fr 10fr;
-    font-family: Roboto;
+    font-family: Roboto, sans-serif;
 }
 
 .header {
-    display: grid;
+    display: flex;
     grid-template-rows: 1fr;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     background-color: var(--light-blue);
+}
+
+.header img {
+    height: 100px;
+    padding: 10px 10px 10px 30px;
 }
 
 .header h1 {
@@ -126,6 +131,15 @@ body, html {
     justify-self: center;
 }
 
+.open-button:hover,
+.card button:first-of-type:hover,
+.card button:last-of-type:hover,
+.enter:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: 150ms;
+}
+
 /* Pop-up Form */
 .form-popup {
     display: none;
@@ -143,6 +157,7 @@ body, html {
     margin-top: auto;
     margin-bottom: auto;
 
+    border-radius: 10px;
     background-color: var(--light-blue);
     z-index: 99999;
 }
@@ -227,4 +242,27 @@ body, html {
     background-color: black;
     opacity: 0.5;
     z-index: 99998;
+}
+
+.footer {
+    background-color: var(--dark-blue);
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    color: var(--light-blue);
+    gap: 10px;
+}
+
+.footer p {
+    padding-bottom: 3px;
+}
+.footer svg {
+    fill: var(--light-blue);
+    height: 23px;
+}
+
+.footer svg:hover {
+    fill: var(--light-cyan);
 }
