@@ -123,21 +123,22 @@ body, html {
 .row label {
     padding: 0.25rem;
     position: absolute;
-    left: 1.15rem;
-    top: 0.35rem;
+    left: 1rem;
+    top: 0.56rem;
     background-color: var(--violet);
     color: var(--light-green);
 }
 
 .row input {
-    width: 97%;
+    width: 92%;
     height: 1.7rem;
-    padding: 0.25rem;
-    border: 2px solid rgb(179, 179, 179);
-    border-radius: 5px;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    border: 2px solid var(--mid-green);
+    border-radius: 10px;
     outline: none;
     background-color: var(--violet);
     font-family: inherit;
+    color: var(--light-green);
 }
 
 .row input:hover { 
@@ -149,11 +150,12 @@ body, html {
 }
 
 /* label animation  */
-.row input:focus ~ label{
+.row input:focus ~ label,
+.row input:not(:placeholder-shown) ~ label {
     top: -0.9rem;
     left: 0.4rem;
     font-size: 12px;
-    transition: 120ms;
+    transition: 150ms;
 }
 
 .row #played-before {
@@ -162,7 +164,16 @@ body, html {
 }
 
 .checkbox {
-    color: #b9c6ae;
+    color: var(--light-green);
+}
+
+.enter {
+    border: none;
+    border-radius: 10px;
+    background-color: var(--mid-green);
+    font-size: 17px;
+    font-weight: bold;
+    color: var(--violet);
 }
 
 .disabler {
