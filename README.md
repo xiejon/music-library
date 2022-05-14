@@ -2,7 +2,7 @@
 
 An app that allows users to enter and keep track of repertoire.
 
-Viewable at https://xiejon.github.io/Library/
+Viewable at https://xiejon.github.io/music-library/
 
 ## Key Takeaways 
 
