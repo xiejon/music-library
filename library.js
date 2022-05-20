@@ -10,48 +10,69 @@ class Repertoire {
         this.indexVal = indexVal;
     }
 }
-function createCard(music) {
-    const container = document.querySelector('.cards-container');
-    const card = document.createElement('div');
-    const removeButton = document.createElement('button');
-    const title = document.createElement('p');
-    const composer = document.createElement('p');
-    const instrument = document.createElement('p');
-    const keySig = document.createElement('p');
-    const playedButton = document.createElement('button');
-    card.classList.add('card');
-    removeButton.classList.add('remove');
-    playedButton.classList.add('played');
 
-    // add title, composer, etc. to card
-    title.textContent = music.title;
-    composer.textContent = music.composer;
-    instrument.textContent = music.instrument;
-    keySig.textContent = music.keySig;
-    if (music.playedBefore) {
-        playedButton.textContent = "PLAYED";
-    } else {
-        playedButton.textContent = "NEW";
+const card = (() => {
+    const container     = document.querySelector('.cards-container');
+    const card          = document.createElement('div');
+    const removeButton  = document.createElement('button');
+    const title         = document.createElement('p');
+    const composer      = document.createElement('p');
+    const instrument    = document.createElement('p');
+    const keySig        = document.createElement('p');
+    const playedButton  = document.createElement('button');
+
+    function addClasses() {
+        card.classList.add('card');
+        removeButton.classList.add('remove');
+        playedButton.classList.add('played');
     }
-    removeButton.textContent = "REMOVE";
-    container.appendChild(card);
-    card.appendChild(title);
-    card.appendChild(composer);
-    card.appendChild(instrument);
-    card.appendChild(keySig);
-    card.appendChild(playedButton);
-    card.appendChild(removeButton);
 
-    // add event listener when remove is clicked
-    removeCard.listener();
+    function addText(item) {
+        title.textContent        = item.title;
+        composer.textContent     = item.composer;
+        instrument.textContent   = item.instrument;
+        keySig.textContent       = item.keySig;
+        removeButton.textContent = "REMOVE";
+    }
+
+    function appendItems() {
+        container.appendChild(card);
+        card.appendChild(title);
+        card.appendChild(composer);
+        card.appendChild(instrument);
+        card.appendChild(keySig);
+        card.appendChild(playedButton);
+        card.appendChild(removeButton);
+    }
+
+    // set played status if user checks box
+    function setPlayed(button, item) {
+        if (item.playedBefore) {
+            button.textContent = "PLAYED";
+        } else {
+            button.textContent = "NEW";
+        }
+    }
+
+    function createCard(music) {
+        addClasses();
+        addText(music);
+        appendItems();
+        setPlayed(playedButton, music);
+        // remove card when clicked
+        removeCard.listener();
+        // change played status when button is clicked
+        playedStatus.changeListener();
+    }
+
+    return {
+        createCard: createCard
+    }
     
-    // change played status when button is clicked
-    playedStatus.changeListener();
-}
+})();
 
 // remove card button
 const removeCard = (() => {
-
     function deleteCard() {
         this.parentElement.remove();
     
@@ -69,7 +90,6 @@ const removeCard = (() => {
     return {
         listener: listener
     }
-
 })();
 
 // change 'new' to 'played' when clicked & vice versa
@@ -160,7 +180,7 @@ const storeInput = (() => {
         updateVariables();
         const music = new Repertoire(title, composer, instrument, keySig, playedBefore, indexVal);
         pushToLibrary(music);
-        createCard(music);
+        card.createCard(music);
         popupForm.closeForm();
     }
 
