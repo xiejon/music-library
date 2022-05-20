@@ -1,14 +1,15 @@
 let myLibrary = [];
 
-function Repertoire(title, composer, instrument, keySig, playedBefore, indexVal) {
-    this.title = title;
-    this.composer = composer;
-    this.instrument = instrument;
-    this.keySig = keySig;
-    this.playedBefore = playedBefore;
-    this.indexVal = indexVal;
+class Repertoire {
+    constructor(title, composer, instrument, keySig, playedBefore, indexVal) {
+        this.title = title;
+        this.composer = composer;
+        this.instrument = instrument;
+        this.keySig = keySig;
+        this.playedBefore = playedBefore;
+        this.indexVal = indexVal;
+    }
 }
-
 function createCard(music) {
     const container = document.querySelector('.cards-container');
     const card = document.createElement('div');
@@ -108,25 +109,37 @@ openButton.addEventListener('click', openForm);
 disabler.addEventListener('click', closeForm);
 
 // store input values from form
-let title;
-let composer;
-let instrument;
-let keySig;
-let playedBefore;
-let indexVal;
-const enterButton = document.querySelector('.enter');
-enterButton.addEventListener('click', () => {
-    title = document.querySelector('#title').value;
-    composer = document.querySelector('#composer').value;
-    instrument = document.querySelector('#instrument').value;
-    keySig = document.querySelector('#key-sig').value;
-    playedBefore = document.querySelector('#played-before').checked;
-    indexVal = myLibrary.length;
+
+const storeInput = (() => {
+    let title;
+    let composer;
+    let instrument;
+    let keySig;
+    let playedBefore;
+    let indexVal;
+    const enterButton = document.querySelector('.enter');
+
+    function updateVariables() {
+        title = document.querySelector('#title').value;
+        composer = document.querySelector('#composer').value;
+        instrument = document.querySelector('#instrument').value;
+        keySig = document.querySelector('#key-sig').value;
+        playedBefore = document.querySelector('#played-before').checked;
+        indexVal = myLibrary.length;
+    }
+
+    function pushToLibrary(item) {
+        myLibrary.push(item);
+    }
 
     // create new object in myLibrary and HTML div card
-    const music = new Repertoire(title, composer, instrument, keySig, playedBefore, indexVal);
-    myLibrary.push(music);
-    createCard(music);
+    function processForm() {
+        updateVariables();
+        const music = new Repertoire(title, composer, instrument, keySig, playedBefore, indexVal);
+        pushToLibrary(music);
+        createCard(music);
+        closeForm();
+    }
 
-    closeForm();
-});
+    enterButton.addEventListener('click', processForm);
+})();
