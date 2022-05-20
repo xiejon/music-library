@@ -12,39 +12,6 @@ class Repertoire {
 }
 
 const card = (() => {
-    const container     = document.querySelector('.cards-container');
-    const card          = document.createElement('div');
-    const removeButton  = document.createElement('button');
-    const title         = document.createElement('p');
-    const composer      = document.createElement('p');
-    const instrument    = document.createElement('p');
-    const keySig        = document.createElement('p');
-    const playedButton  = document.createElement('button');
-
-    function addClasses() {
-        card.classList.add('card');
-        removeButton.classList.add('remove');
-        playedButton.classList.add('played');
-    }
-
-    function addText(item) {
-        title.textContent        = item.title;
-        composer.textContent     = item.composer;
-        instrument.textContent   = item.instrument;
-        keySig.textContent       = item.keySig;
-        removeButton.textContent = "REMOVE";
-    }
-
-    function appendItems() {
-        container.appendChild(card);
-        card.appendChild(title);
-        card.appendChild(composer);
-        card.appendChild(instrument);
-        card.appendChild(keySig);
-        card.appendChild(playedButton);
-        card.appendChild(removeButton);
-    }
-
     // set played status if user checks box
     function setPlayed(button, item) {
         if (item.playedBefore) {
@@ -55,9 +22,33 @@ const card = (() => {
     }
 
     function createCard(music) {
-        addClasses();
-        addText(music);
-        appendItems();
+        const container     = document.querySelector('.cards-container');
+        const card          = document.createElement('div');
+        const removeButton  = document.createElement('button');
+        const title         = document.createElement('p');
+        const composer      = document.createElement('p');
+        const instrument    = document.createElement('p');
+        const keySig        = document.createElement('p');
+        const playedButton  = document.createElement('button');
+
+        card.classList.add('card');
+        removeButton.classList.add('remove');
+        playedButton.classList.add('played');
+        
+        title.textContent        = music.title;
+        composer.textContent     = music.composer;
+        instrument.textContent   = music.instrument;
+        keySig.textContent       = music.keySig;
+        removeButton.textContent = "REMOVE";
+
+        container.appendChild(card);
+        card.appendChild(title);
+        card.appendChild(composer);
+        card.appendChild(instrument);
+        card.appendChild(keySig);
+        card.appendChild(playedButton);
+        card.appendChild(removeButton);
+
         setPlayed(playedButton, music);
         // remove card when clicked
         removeCard.listener();
