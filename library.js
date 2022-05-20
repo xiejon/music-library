@@ -52,6 +52,7 @@ function createCard(music) {
 // remove card button
 function deleteCard() {
     this.parentElement.remove();
+
     console.log(this.indexVal);
 
     // remove object from myLibrary
@@ -80,35 +81,46 @@ function changePlayedStatus() {
 }
 
 // open & close pop-up
-function openForm() {
-    document.querySelector('.disabler').style.display = "block";
-    document.querySelector('.form-popup').style.display = "flex";
-}
 
-function closeForm() {
-    document.querySelector('.disabler').style.display = "none";
-    document.querySelector('.form-popup').style.display = "none";
-    clearForm();
-}
+const popupForm = (() => {
+    function openForm() {
+        document.querySelector('.disabler').style.display = "block";
+        document.querySelector('.form-popup').style.display = "flex";
+    }
 
-function clearForm() {
-    title = '';
-    author = '';
-    pages = '';
-    read = false;
-    document.querySelector('#title').value = '';
-    document.querySelector('#composer').value = '';
-    document.querySelector('#instrument').value = '';
-    document.querySelector('#key-sig').value = '';
-    document.querySelector('#played-before').checked = false;
-}
+    function closeForm() {
+        document.querySelector('.disabler').style.display = "none";
+        document.querySelector('.form-popup').style.display = "none";
+        clearForm();
+    }
 
-const openButton = document.querySelector('.open-button');
-const disabler = document.querySelector('.disabler');
-openButton.addEventListener('click', openForm);
-disabler.addEventListener('click', closeForm);
+    function clearForm() {
+        document.querySelector('#title').value = '';
+        document.querySelector('#composer').value = '';
+        document.querySelector('#instrument').value = '';
+        document.querySelector('#key-sig').value = '';
+        document.querySelector('#played-before').checked = false;
+    }
 
-// store input values from form
+    const popupOpener = () => {
+        const openButton = document.querySelector('.open-button');
+        openButton.addEventListener('click', openForm);
+    }
+    
+    const disabler = () => {
+        const disable = document.querySelector('.disabler');
+        disable.addEventListener('click', closeForm);
+    }
+
+    popupOpener();
+    disabler();
+
+    return {
+        openForm: openForm,
+        closeForm: closeForm, 
+        clearForm: clearForm
+    }
+})();
 
 const storeInput = (() => {
     let title;
@@ -132,14 +144,14 @@ const storeInput = (() => {
         myLibrary.push(item);
     }
 
-    // create new object in myLibrary and HTML div card
     function processForm() {
         updateVariables();
         const music = new Repertoire(title, composer, instrument, keySig, playedBefore, indexVal);
         pushToLibrary(music);
         createCard(music);
-        closeForm();
+        popupForm.closeForm();
     }
 
+    // on form submit: create new object in myLibrary and HTML div card
     enterButton.addEventListener('click', processForm);
 })();
