@@ -43,44 +43,56 @@ function createCard(music) {
     card.appendChild(removeButton);
 
     // add event listener when remove is clicked
-    removeCard();
+    removeCard.listener();
     
     // change played status when button is clicked
-    changePlayedStatus();
+    playedStatus.changeListener();
 }
 
 // remove card button
-function deleteCard() {
-    this.parentElement.remove();
+const removeCard = (() => {
 
-    console.log(this.indexVal);
-
-    // remove object from myLibrary
-    myLibrary.splice(this.indexVal, 1);
-}
-function removeCard() {
-    const removeButtons = document.querySelectorAll('.remove');
-    for (let i = 0; i < removeButtons.length; i++) {
-        removeButtons[i].addEventListener('click', deleteCard);
+    function deleteCard() {
+        this.parentElement.remove();
+    
+        // remove object from myLibrary
+        myLibrary.splice(this.indexVal, 1);
     }
-}
 
-// change 'new' to 'played' when clicked, vice versa
-function changeToPlayed(button) {
-    if (this.textContent === "NEW") {
-        this.textContent = "PLAYED";
-    } else {
-        this.textContent = "NEW";
+    const listener = () => {
+        const removeButtons = document.querySelectorAll('.remove');
+        for (let i = 0; i < removeButtons.length; i++) {
+            removeButtons[i].addEventListener('click', deleteCard);
+        }
     }
-}
-function changePlayedStatus() {
-    const playedButtons = document.querySelectorAll('.played');
-    for (let i = 0; i < playedButtons.length; i++) {
-        playedButtons[i].addEventListener('click', changeToPlayed);
-    }
-}
 
-// open & close pop-up
+    return {
+        listener: listener
+    }
+
+})();
+
+// change 'new' to 'played' when clicked & vice versa
+const playedStatus = (() => {
+    function change(button) {
+        if (this.textContent === "NEW") {
+            this.textContent = "PLAYED";
+        } else {
+            this.textContent = "NEW";
+        }
+    }
+
+    const changeListener = () => {
+        const playedButtons = document.querySelectorAll('.played');
+        for (let i = 0; i < playedButtons.length; i++) {
+            playedButtons[i].addEventListener('click', change);
+        }
+    }
+
+    return {
+        changeListener: changeListener
+    }
+})();
 
 const popupForm = (() => {
     function openForm() {
