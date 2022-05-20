@@ -25,3 +25,4 @@ Viewable at https://xiejon.github.io/music-library/
 - Option to search for repertoire by title or composer
 - Function to sort library alphabetically 
 
+**Edit 5/20/2022: Revisited this project and encapsulated code in modules for better readability and code organization**  
