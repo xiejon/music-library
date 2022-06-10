@@ -33,34 +33,39 @@ class Repertoire {
         container.appendChild(card);
         card.append(title, composer, instrument, keySig, playedButton, removeButton);
 
-        this.setPlayed(playedButton, music);
-
-        // change played status when button is clicked
-        this.changePlayed();
+        this.setPlayed(playedButton);
 
         // Add listeners to new card
-        removeButton.addEventListener('click', this.deleteCard);
-        playedButton.addEventListener('click', this.changePlayed);
+        removeButton.addEventListener('click', () => {
+            this.deleteCard(removeButton);
+            this.updateIndexes();
+        });
+        playedButton.addEventListener('click', () => this.changePlayed(playedButton));
     }
-    setPlayed(button, item) {
-        if (item.playedBefore) {
-            button.textContent = "PLAYED";
-        } else {
-            button.textContent = "NEW";
-        }
-    }
-    deleteCard() {
-        this.parentElement.remove();
-    
-        // remove object from myLibrary
+    deleteCard(btn) {
+        btn.parentElement.remove();
+        // Remove item from myLibrary
         myLibrary.splice(this.indexVal, 1);
     } 
-    changePlayed() {
-        if (this.textContent === "NEW") {
-            this.textContent = "PLAYED";
+    setPlayed(btn) {
+        this.playedBefore ? btn.textContent = "PLAYED" : btn.textContent = "NEW";
+    }
+    changePlayed(btn) {
+        let played;
+        if (this.playedBefore) {
+            played = false;
+            btn.textContent = "NEW";
         } else {
-            this.textContent = "NEW";
+            played = true;
+            btn.textContent = "PLAYED";
         }
+        myLibrary[this.indexVal].playedBefore = played;
+        console.log(myLibrary[this.indexVal].playedBefore)
+    }
+    updateIndexes() {
+        myLibrary.forEach((item, index) => {
+            item.indexVal = index;
+        });
     }
 }
 
@@ -85,11 +90,13 @@ const Popup = () => {
             const instrument   = Popup().getInput('#instrument');
             const keySig       = Popup().getInput('#key-sig');
             const playedBefore = Popup().getInput('#played-before');
-            const indexVal     = myLibrary.length;
 
-            const newRep = new Repertoire(title, composer, instrument, keySig, playedBefore, indexVal);
+            const newRep = new Repertoire(title, composer, instrument, keySig, playedBefore);
             myLibrary.push(newRep);
             newRep.createCard(newRep);
+
+            // Add index to new item
+            newRep.updateIndexes();
         },
         openForm() {
             // may not work...
@@ -107,7 +114,7 @@ const Popup = () => {
             document.querySelector('#key-sig').value = '';
             document.querySelector('#played-before').checked = false;
         }, 
-        getInput(element, bool) {
+        getInput(element) {
             if (element === '#played-before') {
                 return document.querySelector(element).checked;
             } else {
@@ -117,3 +124,28 @@ const Popup = () => {
     }
 }
 Popup().addPopupListeners();
+
+// Local Storage
+const locStorage = () => {
+    return {
+        save() {
+            localStorage.setItem('library', JSON.stringify(myLibrary));
+        },
+        getLibrary() {
+            return JSON.parse(localStorage.getItem('library'));
+        },
+        render() {
+            const cards = this.getLibrary();
+            console.log(localStorage);
+            if (cards) {
+                for (let card of cards) {
+                    let newCard = Object.assign(new Repertoire(), card);
+                    myLibrary.push(newCard);
+                    newCard.createCard(newCard);
+                }
+            }
+        }
+    }
+}
+window.onload = () => locStorage().render();
+window.onunload = () => locStorage().save();
