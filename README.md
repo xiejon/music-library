@@ -6,9 +6,11 @@ Viewable at https://xiejon.github.io/music-library/
 
 ## Updates on 6/10/2022
 1. OOP
-    - After learning about OOP and SOLID principles later on in the curriculum, I revisited this project and refactored my code in classes & factory functions. 
+    - After learning about OOP and SOLID principles later on in the curriculum, I revisited this project and refactored my code using classes & factory functions. 
 2. Local Storage
-    - I used localStorage to retain library entries after tab closures or page reloads, finally making use of the myLibrary array. 
+    - I used localStorage to retain entries after tab closures or page reloads, using JSON.stringify() and JSON.parse() to store and retrieve the library array.
+3. Form Validation
+    - I added JS form validation to require a title name using the Constraint Validation API. 
 
 ## Objectives 
 
