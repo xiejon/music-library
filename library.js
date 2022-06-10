@@ -9,20 +9,9 @@ class Repertoire {
         this.playedBefore = playedBefore;
         this.indexVal = indexVal;
     }
-}
-
-const card = (() => {
-    // set played status if user checks box
-    function setPlayed(button, item) {
-        if (item.playedBefore) {
-            button.textContent = "PLAYED";
-        } else {
-            button.textContent = "NEW";
-        }
-    }
-
-    function createCard(music) {
+    createCard(music) {
         const container     = document.querySelector('.cards-container');
+
         const card          = document.createElement('div');
         const removeButton  = document.createElement('button');
         const title         = document.createElement('p');
@@ -42,139 +31,89 @@ const card = (() => {
         removeButton.textContent = "REMOVE";
 
         container.appendChild(card);
-        card.appendChild(title);
-        card.appendChild(composer);
-        card.appendChild(instrument);
-        card.appendChild(keySig);
-        card.appendChild(playedButton);
-        card.appendChild(removeButton);
+        card.append(title, composer, instrument, keySig, playedButton, removeButton);
 
-        setPlayed(playedButton, music);
-        // remove card when clicked
-        removeCard.listener();
+        this.setPlayed(playedButton, music);
+
         // change played status when button is clicked
-        playedStatus.changeListener();
-    }
+        this.changePlayed();
 
-    return {
-        createCard: createCard
+        // Add listeners to new card
+        removeButton.addEventListener('click', this.deleteCard);
+        playedButton.addEventListener('click', this.changePlayed);
     }
-    
-})();
-
-// remove card button
-const removeCard = (() => {
-    function deleteCard() {
+    setPlayed(button, item) {
+        if (item.playedBefore) {
+            button.textContent = "PLAYED";
+        } else {
+            button.textContent = "NEW";
+        }
+    }
+    deleteCard() {
         this.parentElement.remove();
     
         // remove object from myLibrary
         myLibrary.splice(this.indexVal, 1);
-    }
-
-    const listener = () => {
-        const removeButtons = document.querySelectorAll('.remove');
-        for (let i = 0; i < removeButtons.length; i++) {
-            removeButtons[i].addEventListener('click', deleteCard);
-        }
-    }
-
-    return {
-        listener: listener
-    }
-})();
-
-// change 'new' to 'played' when clicked & vice versa
-const playedStatus = (() => {
-    function change(button) {
+    } 
+    changePlayed() {
         if (this.textContent === "NEW") {
             this.textContent = "PLAYED";
         } else {
             this.textContent = "NEW";
         }
     }
+}
 
-    const changeListener = () => {
-        const playedButtons = document.querySelectorAll('.played');
-        for (let i = 0; i < playedButtons.length; i++) {
-            playedButtons[i].addEventListener('click', change);
-        }
-    }
-
-    return {
-        changeListener: changeListener
-    }
-})();
-
-const popupForm = (() => {
-    function openForm() {
-        document.querySelector('.disabler').style.display = "block";
-        document.querySelector('.form-popup').style.display = "flex";
-    }
-
-    function closeForm() {
-        document.querySelector('.disabler').style.display = "none";
-        document.querySelector('.form-popup').style.display = "none";
-        clearForm();
-    }
-
-    function clearForm() {
-        document.querySelector('#title').value = '';
-        document.querySelector('#composer').value = '';
-        document.querySelector('#instrument').value = '';
-        document.querySelector('#key-sig').value = '';
-        document.querySelector('#played-before').checked = false;
-    }
-
-    const popupOpener = () => {
-        const openButton = document.querySelector('.open-button');
-        openButton.addEventListener('click', openForm);
-    }
-    
-    const disabler = () => {
-        const disable = document.querySelector('.disabler');
-        disable.addEventListener('click', closeForm);
-    }
-
-    popupOpener();
-    disabler();
-
-    return {
-        openForm: openForm,
-        closeForm: closeForm, 
-        clearForm: clearForm
-    }
-})();
-
-const storeInput = (() => {
-    let title;
-    let composer;
-    let instrument;
-    let keySig;
-    let playedBefore;
-    let indexVal;
+const Popup = () => {
+    const form = document.querySelector('.form-popup');
+    const disabler = document.querySelector('.disabler');
+    const openButton = document.querySelector('.open-button');
     const enterButton = document.querySelector('.enter');
 
-    function updateVariables() {
-        title = document.querySelector('#title').value;
-        composer = document.querySelector('#composer').value;
-        instrument = document.querySelector('#instrument').value;
-        keySig = document.querySelector('#key-sig').value;
-        playedBefore = document.querySelector('#played-before').checked;
-        indexVal = myLibrary.length;
-    }
+    return {
+        addPopupListeners() {
+            openButton.addEventListener('click', this.openForm);
+            disabler.addEventListener('click', this.closeForm);
+            enterButton.addEventListener('click', () => {
+                this.processForm();
+                this.closeForm();
+            });
+        },
+        processForm() {
+            const title        = Popup().getInput('#title');
+            const composer     = Popup().getInput('#composer');
+            const instrument   = Popup().getInput('#instrument');
+            const keySig       = Popup().getInput('#key-sig');
+            const playedBefore = Popup().getInput('#played-before');
+            const indexVal     = myLibrary.length;
 
-    function pushToLibrary(item) {
-        myLibrary.push(item);
-    }
+            const newRep = new Repertoire(title, composer, instrument, keySig, playedBefore, indexVal);
+            myLibrary.push(newRep);
+            newRep.createCard(newRep);
+        },
+        openForm() {
+            // may not work...
+            disabler.style.display = "block";
+            form.style.display = "flex";
+        }, 
+        closeForm() {
+            disabler.style.display = "none";
+            form.style.display = "none";
 
-    function processForm() {
-        updateVariables();
-        const music = new Repertoire(title, composer, instrument, keySig, playedBefore, indexVal);
-        pushToLibrary(music);
-        card.createCard(music);
-        popupForm.closeForm();
+            // Clear form inputs
+            document.querySelector('#title').value = '';
+            document.querySelector('#composer').value = '';
+            document.querySelector('#instrument').value = '';
+            document.querySelector('#key-sig').value = '';
+            document.querySelector('#played-before').checked = false;
+        }, 
+        getInput(element, bool) {
+            if (element === '#played-before') {
+                return document.querySelector(element).checked;
+            } else {
+                return document.querySelector(element).value;
+            }
+        }
     }
-
-    // on form submit: create new object in myLibrary and HTML div card
-    enterButton.addEventListener('click', processForm);
-})();
+}
+Popup().addPopupListeners();
