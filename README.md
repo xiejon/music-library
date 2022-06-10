@@ -4,6 +4,12 @@ An app that allows users to enter and keep track of repertoire. Adapted from the
 
 Viewable at https://xiejon.github.io/music-library/
 
+## Updates on 6/10/2022
+1. OOP
+    - After learning about OOP and SOLID principles later on in the curriculum, I revisited this project and refactored my code in classes & factory functions. 
+2. Local Storage
+    - I used localStorage to retain library entries after tab closures or page reloads, finally making use of the myLibrary array. 
+
 ## Objectives 
 
 1. Allow user to click button to add music repertoire. The user will then fill out a form with the title of the piece, composer, key, etc.
@@ -13,16 +19,13 @@ Viewable at https://xiejon.github.io/music-library/
 ## Motivation
 
 - I just learned about object constructors. Here, I experimented using an object constructor to turn user input into an object, before pushing it onto an array. 
-- I am an opera singer, and I love the idea of a visual online library containing all of my music in an easy to read format. 
+- As an opera singer, I love the idea of a visual online library containing all of my music in an easy to read format. 
 
 ## Challenges 
 1. User Experience
-    - It is important to me that the app is pleasant to use. From my own experience, I know how simple hover effects and a well-designed UI makes me much more likely to continue using a website or app. However, there were some things I didn't quite know how to implement. For example: jumping placeholders in my form inputs. It took lots of trial and error before I found a working solution.
+    - It was important to me that the app would be pleasant to use. Simple hover effects and a well-designed UI greatly improve the experience of using a website or app. There were some things I didn't immediately know how to implement, i.e. jumping placeholders in my form inputs. 
 
 ## Areas for Improvement 
 
-- Allow the user to sign-in and store their library online. Currently, the myLibrary array is not being used.
 - Option to search for repertoire by title or composer
 - Function to sort library alphabetically 
-
-**Edit 5/20/2022: Revisited this project and encapsulated code in modules for better readability and code organization**  
