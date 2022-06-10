@@ -89,11 +89,11 @@ const Popup = () => {
     addPopupListeners() {
       openButton.addEventListener("click", this.openForm);
       disabler.addEventListener("click", this.closeForm);
-      enterButton.addEventListener("click", e => {
+      enterButton.addEventListener("click", (e) => {
         const valid = this.validateForm(e);
         if (valid) {
-            this.processForm();
-            this.closeForm();
+          this.processForm();
+          this.closeForm();
         }
       });
     },
@@ -141,25 +141,25 @@ const Popup = () => {
       }
     },
     validateForm(e) {
-        const title = document.querySelector('#title');
-        const titleError = document.querySelector('.error');
-        if (!title.validity.valid) {
-            this.showError(title, titleError);
-            e.preventDefault();
-            return false;
-        } else {
-            titleError.textContent = '';
-            // Reset visual state of message
-            titleError.className = 'error';
-            return true;
-        }
+      const title = document.querySelector("#title");
+      const titleError = document.querySelector(".error");
+      if (!title.validity.valid) {
+        this.showError(title, titleError);
+        e.preventDefault();
+        return false;
+      } else {
+        titleError.textContent = "";
+        // Reset visual state of message
+        titleError.className = "error";
+        return true;
+      }
     },
     showError(el, error) {
-        if (el.validity.valueMissing) {
-            error.textContent = 'Please enter a title.'
-        }
-        error.className = 'error active';
-    }
+      if (el.validity.valueMissing) {
+        error.textContent = "Please enter a title.";
+      }
+      error.className = "error active";
+    },
   };
 };
 Popup().addPopupListeners();
